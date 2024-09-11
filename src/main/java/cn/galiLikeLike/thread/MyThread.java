@@ -5,8 +5,14 @@ import org.slf4j.LoggerFactory;
 
 public class MyThread extends Thread {
 	private Logger logger = LoggerFactory.getLogger(MyThread.class);
+
+	public MyThread(String name) {
+		setName(name);
+	}
+	
 	@Override
 	public void run() {
-		MyTask.sum();
+		MyTask.sumReentLock();
+//		MyTask.sumSynchronized();
 	}
 }
