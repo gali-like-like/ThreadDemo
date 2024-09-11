@@ -45,7 +45,10 @@ public class MyTask {
 	public static Integer sumReentLock() {
 		//ReentrantLock 保证原子性
 		try {
-			lock.tryLock(2, TimeUnit.SECONDS);
+			Long start = System.currentTimeMillis();
+			lock.tryLock(5, TimeUnit.SECONDS);
+			Long end = System.currentTimeMillis();
+			logger.info("阻塞等待时间:{}ms",end-start);
 			for(int i = 0;i<10;i++) {
 				sum+=i;
 //				logger.info("current sum:{}",sum);

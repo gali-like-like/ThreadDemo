@@ -16,6 +16,7 @@ public class MainThread {
 	private  static Logger logger = LoggerFactory.getLogger(MainThread.class);
 	public static void main(String[] args) throws InterruptedException, ExecutionException, TimeoutException {
 		for(int i = 0;i<10;i++) {
+			//n个线程跑同一个自带锁的任务,其中一个线程最多等待(n-1)*任务执行时间
 			MyThread thread1 = new MyThread("thread-1");
 			Thread thread2 = new Thread(new MyRunnable(),"thread-2");
 			FutureTask<Integer> futureTask = new FutureTask<Integer>(new MyCaller());
@@ -23,7 +24,6 @@ public class MainThread {
 			thread1.start();
 			thread2.start();
 			thread3.start();
-
 			thread1.join();
 			thread2.join();
 			thread3.join();
